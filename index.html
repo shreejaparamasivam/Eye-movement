@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye Movement Animation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      margin: 0;
+    }
+    .face {
+      background-color: #FFF;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .eye {
+      background-color: #FFF;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      position: relative;
+      margin: 0 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid black;
+    }
+    .pupil {
+      background-color: #000;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div class="face">
+    <div class="eye" id="left-eye">
+      <div class="pupil" id="left-pupil"></div>
+    </div>
+    <div class="eye" id="right-eye">
+      <div class="pupil" id="right-pupil"></div>
+    </div>
+  </div>
+
+  <script>
+    // Select eyes and pupils
+    const leftEye = document.getElementById('left-eye');
+    const rightEye = document.getElementById('right-eye');
+    const leftPupil = document.getElementById('left-pupil');
+    const rightPupil = document.getElementById('right-pupil');
+
+    // Define max movement range for pupils
+    const maxMove = 20;
+
+    // Function to update eye movement
+    function moveEyes(event) {
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = (event.clientY / window.innerHeight) * 2 - 1;
+
+      // Calculate new pupil position
+      const moveX = maxMove * x;
+      const moveY = maxMove * y;
+
+      // Apply movement to the pupils
+      leftPupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      rightPupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    }
+
+    // Listen to mouse movement event
+    document.addEventListener('mousemove', moveEyes);
+  </script>
+</body>
+</html>
